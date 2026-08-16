@@ -37,3 +37,10 @@ bookingForm.addEventListener("submit", function (e) {
 
   window.open(whatsappURL, "_blank");
 });
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+});
