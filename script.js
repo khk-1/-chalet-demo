@@ -1,6 +1,39 @@
-// Smooth reveal for gallery cards
-const items = document.querySelectorAll('.gallery img');
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';observer.unobserve(e.target)}})
-},{threshold:.08});
-items.forEach(img=>{img.style.opacity='0';img.style.transform='translateY(15px)';img.style.transition='opacity .6s ease, transform .6s ease';observer.observe(img)});
+const bookingForm = document.getElementById("bookingForm");
+
+bookingForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const checkin = document.getElementById("checkin").value;
+  const checkout = document.getElementById("checkout").value;
+  const guests = document.getElementById("guests").value;
+
+  if (!checkin || !checkout || !guests) {
+    alert("فضلاً أكمل جميع بيانات الحجز.");
+    return;
+  }
+
+  if (checkout <= checkin) {
+    alert("تاريخ المغادرة يجب أن يكون بعد تاريخ الوصول.");
+    return;
+  }
+
+  const whatsappNumber = "966505135240";
+
+  const message =
+`السلام عليكم 👋
+
+أرغب بحجز الشاليه.
+
+📅 تاريخ الوصول: ${checkin}
+📅 تاريخ المغادرة: ${checkout}
+👥 عدد الأشخاص: ${guests}
+
+أرغب بالاستفسار عن السعر والتوفر.
+
+شكراً لكم 🌹`;
+
+  const whatsappURL =
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  window.open(whatsappURL, "_blank");
+});
